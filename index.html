@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Duleep & Marita's Wedding</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Raleway:wght@300;400&display=swap" rel="stylesheet"/>
+
+<script>
+  const CLOUD_NAME = "dzbonbmvv";
+  const UPLOAD_PRESET = "wedding_photos";
+</script>
+
+<style>
+  :root {
+    --bg: #faf7f2;
+    --wine: #3e1520;
+    --gold: #b8903a;
+    --text: #2a160e;
+    --border: #e0d4c4;
+  }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .date-header {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 11px;
+    color: var(--gold);
+    margin-bottom: 15px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 8vw, 64px);
+    color: var(--wine);
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    margin: 15px 0 50px;
+    opacity: 0.8;
+  }
+
+  /* Dash Line Upload Box */
+  .upload-container {
+    max-width: 500px;
+    margin: 0 auto 80px;
+  }
+
+  #upload_btn {
+    width: 100%;
+    background: transparent;
+    border: 1px dashed var(--gold);
+    padding: 60px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+  }
+
+  #upload_btn:hover {
+    background: rgba(184, 144, 58, 0.05);
+    border-style: solid;
+  }
+
+  .btn-icon { font-size: 32px; color: var(--gold); margin-bottom: 10px; }
+  .btn-text { font-size: 14px; letter-spacing: 1px; color: var(--wine); }
+
+  /* Gallery Grid */
+  .gallery-section {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 2px;
+    background: #f2ebe0;
+    animation: fadeIn 0.8s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  #status { font-size: 12px; color: var(--gold); margin-top: 15px; min-height: 18px; }
+</style>
+</head>
+<body>
+
+  <div class="date-header">Saturday, April 18, 2026</div>
+  <h1>Duleep & Marita</h1>
+  <p class="tagline">Share your moments with us</p>
+
+  <div class="upload-container">
+    <button id="upload_btn">
+      <div class="btn-icon">⊕</div>
+      <div class="btn-text">TAP TO UPLOAD PHOTOS</div>
+    </button>
+    <div id="status"></div>
+  </div>
+
+  <div class="gallery-section">
+    <div class="gallery-grid" id="gallery">
+      </div>
+  </div>
+
+<script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+
+<script>
+  const galleryEl = document.getElementById('gallery');
+  const statusEl = document.getElementById('status');
+
+  // Load photos tagged with 'wedding'
+  async function loadGallery() {
+    // This timestamp forces Cloudinary to bypass the cache and show deletions instantly
+    const cacheBuster = new Date().getTime();
+    const url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/v${cacheBuster}/wedding.json`;
+    
+    try {
+      const res = await fetch(url);
+      
+      // If the response is not 200 (usually because no images exist with that tag)
+      if (!res.ok) {
+        galleryEl.innerHTML = "";
+        return;
+      }
+
+      const data = await res.json();
+      
+      if (data.resources && data.resources.length > 0) {
+        galleryEl.innerHTML = data.resources.map(img => `
+          <img src="https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_600,h_600,g_auto/v${img.version}/${img.public_id}.${img.format}" />
+        `).join('');
+      } else {
+        // Clear gallery if data comes back empty
+        galleryEl.innerHTML = "";
+      }
+    } catch (e) {
+      // If the fetch fails entirely
+      galleryEl.innerHTML = "";
+      console.log("Gallery reset: No images found.");
+    }
+  }
+
+  // Initialize Cloudinary Widget
+  var myWidget = cloudinary.createUploadWidget({
+    cloudName: CLOUD_NAME, 
+    uploadPreset: UPLOAD_PRESET,
+    sources: ['local', 'camera'],
+    multiple: true,
+    clientAllowedFormats: ["jpg", "png", "heic", "jpeg"],
+    maxFileSize: 15000000, 
+    styles: {
+      palette: {
+        window: "#FAF7F2",
+        sourceBg: "#FAF7F2",
+        windowBorder: "#B8903A",
+        tabIcon: "#3E1520",
+        textDark: "#2A160E",
+        textLight: "#FFFFFF",
+        mainIcons: "#3E1520",
+        link: "#B8903A",
+        action: "#3E1520",
+        inProgress: "#D4AC5A",
+        complete: "#B8903A"
+      }
+    }
+  }, (error, result) => { 
+    if (result.event === "success") { 
+      statusEl.innerText = "Syncing with gallery...";
+      setTimeout(() => {
+        statusEl.innerText = "";
+        loadGallery(); 
+      }, 2500);
+    }
+  });
+
+  document.getElementById("upload_btn").addEventListener("click", () => myWidget.open());
+
+  // Initial load
+  loadGallery();
+</script>
+
+</body>
+</html>
