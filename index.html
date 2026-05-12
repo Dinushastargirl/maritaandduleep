@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Duleep & Marita's Wedding</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Raleway:wght@300;400&display=swap" rel="stylesheet"/>
+<title>Duleep & Marita's Wedding Invitation</title>
+
+<!-- Modern Premium Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
 
 <script>
   const CLOUD_NAME = "dzbonbmvv";
@@ -13,161 +17,2324 @@
 
 <style>
   :root {
-    --bg: #faf7f2;
-    --wine: #3e1520;
-    --gold: #b8903a;
-    --text: #2a160e;
-    --border: #e0d4c4;
+    --bg-page: #0C0507;        /* Midnight Velvet Black/Rose */
+    --scroll-bg: rgba(22, 11, 13, 0.94); /* Royal Dark Velvet Scroll */
+    --primary: #F5D393;        /* Bright Champagne Gold */
+    --primary-light: #FBEBD0;
+    --accent: #D1A85C;         /* Shimmering Rich Gold */
+    --accent-light: rgba(209, 168, 92, 0.15);
+    --text-main: #F2ECE1;      /* Crisp Warm Cream */
+    --text-muted: #B39E96;     /* Muted Dusty Rose/Bronze */
+    --sage: #81A18F;           /* Dusty Sea Garden Green */
+    --sage-light: rgba(129, 161, 143, 0.12);
+    --card-bg: rgba(30, 16, 19, 0.75); /* Deep Dark Translucent card */
+    --card-border: rgba(209, 168, 92, 0.22);
+    --shadow-dark: 0 25px 50px rgba(0, 0, 0, 0.7);
+    --shadow-glow: 0 0 20px rgba(209, 168, 92, 0.15);
+    --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --radius: 12px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   body {
-    font-family: 'Raleway', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    margin: 0;
-    padding: 60px 20px;
-    text-align: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
   }
 
-  .date-header {
-    text-transform: uppercase;
-    letter-spacing: 3px;
+  /* --- WELCOME ENTRANCE SCREEN --- */
+  .welcome-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #080304;
+    background-image: radial-gradient(circle at 50% 40%, #1C0A0F 0%, #080304 80%);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s;
+  }
+
+  .welcome-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .welcome-monogram-container {
+    position: relative;
+    margin-bottom: 30px;
+    animation: fadeInUp 1s ease;
+  }
+
+  .welcome-wreath {
+    width: 160px;
+    height: 160px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1;
+    opacity: 0.85;
+    animation: rotateSlow 50s linear infinite;
+  }
+
+  .welcome-letters {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 65px;
+    color: var(--primary);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 15px rgba(245, 211, 147, 0.3);
+  }
+
+  .welcome-subtitle {
     font-size: 11px;
-    color: var(--gold);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 15px;
+    opacity: 0.9;
+    animation: fadeInUp 1s ease 0.2s both;
+  }
+
+  .welcome-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 6vw, 68px);
+    color: #FFF;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 5px;
+    animation: fadeInUp 1s ease 0.4s both;
+  }
+
+  .welcome-title .and {
+    font-family: 'Pinyon Script', cursive;
+    color: var(--accent);
+    font-size: 0.95em;
+    display: block;
+    margin: -10px 0;
+    text-shadow: none;
+  }
+
+  .welcome-invite-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--text-muted);
+    margin: 15px 0 45px;
+    letter-spacing: 0.5px;
+    animation: fadeInUp 1s ease 0.6s both;
+  }
+
+  .welcome-btn {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--primary);
+    padding: 16px 36px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(209, 168, 92, 0.1);
+    transition: var(--transition);
+    outline: none;
+    animation: fadeInUp 1s ease 0.8s both;
+  }
+
+  .welcome-btn:hover {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 0 25px rgba(209, 168, 92, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .welcome-btn:active {
+    transform: translateY(0);
+  }
+
+
+  /* --- BACKGROUND CANVAS FOR SNOW --- */
+  #snowflake_canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.65;
+  }
+
+
+  /* --- SCROLL-VIBE LAYOUT --- */
+  .scroll-wrapper {
+    position: relative;
+    max-width: 820px;
+    margin: 40px auto 80px;
+    z-index: 2;
+    padding: 0 10px;
+    animation: fadeInUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Ornate Scroll Top/Bottom Rolled Bars (SVGs) */
+  .scroll-roller {
+    width: 100%;
+    height: 32px;
+    position: relative;
+    z-index: 4;
+  }
+
+  .scroll-roller-top {
+    margin-bottom: -1px;
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.5));
+  }
+
+  .scroll-roller-bottom {
+    margin-top: -1px;
+    filter: drop-shadow(0 -10px 10px rgba(0, 0, 0, 0.5));
+  }
+
+  .scroll-bar-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* The Scroll Scroll Parchment body */
+  .scroll-body {
+    background: var(--scroll-bg);
+    border-left: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+    box-shadow: var(--shadow-dark), var(--shadow-glow);
+    padding: 65px 50px 80px;
+    position: relative;
+    z-index: 3;
+    overflow: hidden;
+  }
+
+  /* Inner parchment texture overlay */
+  .scroll-body::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(circle at 50% 30%, rgba(209, 168, 92, 0.04) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+
+  /* --- HERO SECTION INSIDE SCROLL --- */
+  .hero {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    padding-top: 10px;
+  }
+
+  .monogram-container {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 25px;
+  }
+
+  .wreath-svg {
+    width: 130px;
+    height: 130px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1;
+    opacity: 0.85;
+    animation: rotateSlow 40s linear infinite;
+  }
+
+  .monogram {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 50px;
+    color: var(--primary);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    text-shadow: 0 0 10px rgba(245, 211, 147, 0.2);
+  }
+
+  .hero-subtitle {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
     margin-bottom: 15px;
   }
 
   h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 8vw, 64px);
-    color: var(--wine);
-    margin: 0;
+    font-size: clamp(40px, 7vw, 68px);
+    color: #FFF;
     font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .and-connector {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 0.9em;
+    color: var(--accent);
+    display: block;
+    margin: -10px 0;
+    text-transform: none;
   }
 
   .tagline {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 20px;
-    margin: 15px 0 50px;
-    opacity: 0.8;
+    font-size: 21px;
+    color: var(--text-muted);
+    margin: 15px auto 40px;
+    max-width: 580px;
+    font-weight: 400;
   }
 
-  /* Dash Line Upload Box */
-  .upload-container {
-    max-width: 500px;
-    margin: 0 auto 80px;
+
+  /* --- COUNTDOWN TIMER --- */
+  .countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 16px 24px;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    margin: 0 auto 60px;
+    max-width: 440px;
+    backdrop-filter: blur(8px);
+  }
+
+  .countdown-item {
+    text-align: center;
+    min-width: 65px;
+  }
+
+  .countdown-number {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.2;
+    text-shadow: 0 0 10px rgba(245, 211, 147, 0.15);
+  }
+
+  .countdown-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .countdown-separator {
+    color: var(--accent);
+    font-size: 20px;
+    align-self: center;
+    opacity: 0.5;
+    margin-top: -12px;
+  }
+
+
+  /* --- EVENT DETAILS GRID --- */
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 60px;
+  }
+
+  .details-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 35px 25px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    backdrop-filter: blur(8px);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .details-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 15px rgba(209, 168, 92, 0.1);
+    border-color: var(--accent);
+  }
+
+  .details-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+    opacity: 0.7;
+  }
+
+  .card-icon {
+    font-size: 24px;
+    color: var(--primary);
+    margin-bottom: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    background: var(--accent-light);
+    border-radius: 50%;
+    border: 1px solid rgba(209, 168, 92, 0.2);
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+  }
+
+  .card-text {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .card-text.highlight {
+    font-weight: 600;
+    color: #FFF;
+    font-size: 16px;
+  }
+
+  .maps-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 11px 22px;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 15px;
+    transition: var(--transition);
+  }
+
+  .maps-btn:hover {
+    background: var(--primary-light);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(209, 168, 92, 0.25);
+  }
+
+  /* Attire swatches */
+  .swatches {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #1E1013;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    position: relative;
+    cursor: pointer;
+  }
+
+  .swatch::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .swatch:hover::after {
+    opacity: 1;
+    bottom: -22px;
+  }
+
+  /* List highlights */
+  .card-list {
+    list-style: none;
+    text-align: left;
+    max-width: 280px;
+    margin: 10px auto 0;
+  }
+
+  .card-list li {
+    font-size: 13.5px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--text-muted);
+  }
+
+  .card-list li strong {
+    color: var(--primary);
+  }
+
+  .bullet-svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--accent);
+    fill: none;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+
+  /* --- INTERACTIVE RSVP & PHOTO SHARING ZONE --- */
+  .interactive-area {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+
+  /* --- RSVP CARD --- */
+  .rsvp-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 40px 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    backdrop-filter: blur(8px);
+  }
+
+  .rsvp-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .form-group {
+    margin-bottom: 22px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .form-input {
+    width: 100%;
+    background: #150A0C;
+    border: 1px solid rgba(209, 168, 92, 0.25);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text-main);
+    transition: var(--transition);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(245, 211, 147, 0.08);
+  }
+
+  /* Button Choice Selectors */
+  .attendance-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .toggle-btn {
+    background: #150A0C;
+    border: 1px solid rgba(209, 168, 92, 0.25);
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .toggle-btn:hover {
+    border-color: var(--accent);
+    color: var(--primary);
+  }
+
+  .toggle-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+    font-weight: 600;
+  }
+
+  .toggle-btn .circle-check {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+  }
+
+  .toggle-btn.active .circle-check {
+    background: #000;
+    border-color: #000;
+    color: var(--accent);
+  }
+
+  .toggle-btn.active .circle-check::after {
+    content: "✓";
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  /* Slide-out guest dropdown */
+  .guest-count-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .guest-count-container.show {
+    max-height: 100px;
+  }
+
+  /* Elegant submit button */
+  .submit-btn {
+    width: 100%;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(209, 168, 92, 0.15);
+    transition: var(--transition);
+    margin-top: 10px;
+  }
+
+  .submit-btn:hover {
+    background: var(--primary-light);
+    box-shadow: 0 6px 20px rgba(209, 168, 92, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .rsvp-form-container {
+    transition: var(--transition);
+  }
+
+  .rsvp-success-container {
+    display: none;
+    text-align: center;
+    padding: 20px 10px;
+    animation: zoomIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .success-heart {
+    font-size: 50px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    animation: heartBeat 1.5s infinite;
+  }
+
+
+  /* --- PHOTO UPLOAD ZONE --- */
+  .upload-box-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 40px 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   #upload_btn {
     width: 100%;
     background: transparent;
-    border: 1px dashed var(--gold);
+    border: 2px dashed rgba(209, 168, 92, 0.3);
     padding: 60px 20px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 4px;
+    transition: var(--transition);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    outline: none;
   }
 
   #upload_btn:hover {
-    background: rgba(184, 144, 58, 0.05);
+    background: rgba(209, 168, 92, 0.03);
+    border-color: var(--accent);
     border-style: solid;
   }
 
-  .btn-icon { font-size: 32px; color: var(--gold); margin-bottom: 10px; }
-  .btn-text { font-size: 14px; letter-spacing: 1px; color: var(--wine); }
+  .btn-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(209, 168, 92, 0.2);
+    transition: var(--transition);
+  }
 
-  /* Gallery Grid */
+  #upload_btn:hover .btn-icon {
+    background: var(--accent);
+    color: #000;
+    transform: scale(1.08);
+  }
+
+  .btn-text {
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+  }
+
+  .upload-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  #status {
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 15px;
+    min-height: 18px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+
+  /* --- SHARED PHOTO GALLERY --- */
   .gallery-section {
-    max-width: 1000px;
-    margin: 0 auto;
+    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 45px;
+  }
+
+  .section-divider .line {
+    height: 1px;
+    background: var(--card-border);
+    flex-grow: 1;
+    max-width: 100px;
+  }
+
+  .section-divider .title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 0.5px;
   }
 
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    gap: 20px;
   }
 
-  @media (max-width: 600px) {
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 650px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   }
 
-  .gallery-grid img {
+  /* Polaroid Photo Frames with Soft Velvet Tint */
+  .polaroid {
+    background: #180D10;
+    padding: 10px 10px 28px;
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    border: 1px solid rgba(209, 168, 92, 0.15);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .polaroid:nth-child(even) { transform: rotate(1.2deg); }
+  .polaroid:nth-child(odd) { transform: rotate(-1deg); }
+  .polaroid:nth-child(3n) { transform: rotate(1.5deg); }
+
+  .polaroid:hover {
+    transform: translateY(-8px) scale(1.03) rotate(0deg) !important;
+    box-shadow: 0 18px 35px rgba(0,0,0,0.7), 0 0 10px rgba(209, 168, 92, 0.15);
+    border-color: var(--accent);
+    z-index: 10;
+  }
+
+  .polaroid-img-container {
     width: 100%;
     aspect-ratio: 1 / 1;
-    object-fit: cover;
+    overflow: hidden;
     border-radius: 2px;
-    background: #f2ebe0;
-    animation: fadeIn 0.8s ease forwards;
+    background: #0E0608;
+    position: relative;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+  .polaroid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0.85;
+  }
+
+  .polaroid:hover img {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  .polaroid::after {
+    content: "";
+    position: absolute;
+    bottom: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 10px;
+    background: rgba(209, 168, 92, 0.12);
+    border-radius: 2px;
+  }
+
+
+  /* --- FOOTER & LOCK LINK --- */
+  footer {
+    margin-top: 80px;
+    text-align: center;
+    border-top: 1px solid var(--card-border);
+    padding-top: 40px;
+  }
+
+  .footer-love {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    font-style: italic;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+
+  .dashboard-entry-link {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: var(--transition);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 15px;
+  }
+
+  .dashboard-entry-link:hover {
+    opacity: 1;
+    color: var(--accent);
+  }
+
+  .dashboard-entry-link svg {
+    width: 11px;
+    height: 11px;
+    fill: currentColor;
+  }
+
+
+  /* --- LIGHTBOX MODAL --- */
+  .lightbox {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(8, 3, 4, 0.96);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .lightbox.show {
+    display: flex;
+    opacity: 1;
+  }
+
+  .lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+    border: 3px solid #1E1013;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .lightbox.show .lightbox-img {
+    transform: scale(1);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: -45px; right: 0;
+    color: var(--primary);
+    font-size: 32px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    opacity: 0.8;
+    transition: var(--transition);
+  }
+
+  .lightbox-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(30, 16, 19, 0.6);
+    color: var(--primary);
+    border: 1px solid rgba(209, 168, 92, 0.2);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    user-select: none;
+  }
+
+  .lightbox-nav:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .lightbox-prev { left: -70px; }
+  .lightbox-next { right: -70px; }
+
+  @media (max-width: 800px) {
+    .lightbox-prev { left: 10px; background: rgba(0,0,0,0.6); }
+    .lightbox-next { right: 10px; background: rgba(0,0,0,0.6); }
+    .lightbox-close { top: 15px; right: 15px; z-index: 10001; background: rgba(0,0,0,0.6); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;}
+  }
+
+
+  /* --- ADMIN PASSCODE MODAL --- */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(8, 3, 4, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-card {
+    background: #140A0D;
+    border-radius: var(--radius);
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--accent);
+    text-align: center;
+    position: relative;
+    animation: zoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 15px; right: 15px;
+    border: none; background: none;
+    font-size: 18px; color: var(--text-muted);
+    cursor: pointer;
+  }
+
+
+  /* --- COUPLES ADMIN DASHBOARD OVERLAY --- */
+  .admin-dashboard-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(8, 3, 4, 0.75);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .dashboard-card {
+    background: #160D10;
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--accent);
+    padding: 35px;
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+  }
+
+  .dashboard-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .stat-card {
+    background: #1C1013;
+    border: 1px solid var(--card-border);
+    padding: 18px 12px;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .stat-val {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .stat-lbl {
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  .table-container {
+    background: #0E0709;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 25px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  th {
+    background: #1A0F12;
+    color: var(--primary);
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(209, 168, 92, 0.08);
+    color: var(--text-main);
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 9px;
+    font-weight: 600;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-yes {
+    background: var(--sage-light);
+    color: var(--sage);
+    border: 1px solid rgba(129, 161, 143, 0.3);
+  }
+
+  .badge-no {
+    background: rgba(192, 57, 43, 0.12);
+    color: #E74C3C;
+    border: 1px solid rgba(192, 57, 43, 0.3);
+  }
+
+  .no-data {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .dashboard-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--primary);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .btn-outline:hover {
+    background: var(--accent);
+    color: #000;
+  }
+
+  .btn-danger {
+    background: transparent;
+    border: 1px solid #C0392B;
+    color: #E74C3C;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .btn-danger:hover {
+    background: #C0392B;
+    color: #FFF;
+  }
+
+  /* --- SCRIPTURE STYLING --- */
+  .scripture-container {
+    max-width: 650px;
+    margin: 0 auto 55px;
+    text-align: center;
+    background: rgba(209, 168, 92, 0.03);
+    border: 1px dashed rgba(209, 168, 92, 0.25);
+    padding: 40px 30px;
+    border-radius: var(--radius);
+    position: relative;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+  .scripture-container::before {
+    content: "“";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 70px;
+    color: var(--accent);
+    background: #110709;
+    padding: 0 15px;
+    line-height: 1;
+    height: 40px;
+  }
+
+  .scripture-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--text-main);
+    font-style: italic;
+    letter-spacing: 0.2px;
+  }
+
+  .scripture-reference {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 20px;
+    font-weight: 700;
+  }
+
+  /* --- ITINERARY TIMELINE STYLING --- */
+  .itinerary-section {
+    margin-bottom: 70px;
+  }
+
+  .itinerary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .itinerary-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  }
+
+  .itinerary-column {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 30px 25px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+  .itinerary-col-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--primary);
+    border-bottom: 1px solid rgba(209, 168, 92, 0.15);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+  }
+
+  .col-icon {
+    color: var(--accent);
+  }
+
+  .itinerary-timeline {
+    position: relative;
+    padding-left: 15px;
+  }
+
+  .itinerary-timeline::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 4px;
+    bottom: 5px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--accent) 0%, rgba(209, 168, 92, 0.15) 100%);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 25px;
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: -15px;
+    width: 9px;
+    height: 9px;
+    background: #110709;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    z-index: 2;
+    transition: var(--transition);
+  }
+
+  .timeline-item:hover::before {
+    background: var(--primary);
+    transform: scale(1.2);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .time-stamp {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .timeline-content h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #FFF;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .timeline-content p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .timeline-content strong {
+    color: var(--primary);
+  }
+
+  .food-highlight {
+    background: rgba(209, 168, 92, 0.06);
+    border-left: 2px solid var(--accent);
+    padding: 8px 12px;
+    border-radius: 0 4px 4px 0;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-main);
+  }
+
+
+  /* --- MOBILE RESPONSIVE OVERRIDES --- */
+  @media (max-width: 600px) {
+    body {
+      padding: 10px 4px 40px;
+    }
+    .scroll-wrapper {
+      margin: 10px auto 40px;
+      padding: 0;
+    }
+    .scroll-body {
+      padding: 45px 20px 50px;
+      border-left-width: 1px;
+      border-right-width: 1px;
+    }
+    .scroll-roller {
+      height: 24px;
+    }
+    .hero {
+      margin-bottom: 40px;
+    }
+    .wreath-svg {
+      width: 105px;
+      height: 105px;
+    }
+    .monogram {
+      font-size: 42px;
+    }
+    .tagline {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    .details-card {
+      padding: 25px 15px;
+    }
+    .rsvp-card, .upload-box-card {
+      padding: 30px 15px;
+    }
+    .section-divider {
+      margin-bottom: 30px;
+    }
+    .section-divider .title {
+      font-size: 21px;
+    }
+    .polaroid {
+      padding: 8px 8px 24px;
+    }
+    /* Dashboard Mobile overrides */
+    .dashboard-card {
+      padding: 20px 15px;
+    }
+    .dashboard-title {
+      font-size: 22px;
+    }
+    .stats-row {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      padding: 12px 6px;
+    }
+    .stat-val {
+      font-size: 18px;
+    }
+    th, td {
+      padding: 10px 8px;
+      font-size: 11px;
+    }
+    .dashboard-actions {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    /* Countdown Shrink */
+    .countdown {
+      gap: 8px;
+      padding: 12px 14px;
+      margin-bottom: 40px;
+    }
+    .countdown-item {
+      min-width: 46px;
+    }
+    .countdown-number {
+      font-size: 18px;
+    }
+    .countdown-label {
+      font-size: 8px;
+      letter-spacing: 1px;
+    }
+    .countdown-separator {
+      font-size: 16px;
+      margin-top: -10px;
+    }
+    .swatches {
+      gap: 6px;
+    }
+    .swatch {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    /* RSVP Buttons Stack on tiny phones */
+    .attendance-toggle {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .toggle-btn {
+      padding: 10px;
+      font-size: 12px;
+    }
+  }
+
+
+  /* --- KEYFRAME ANIMATIONS --- */
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  #status { font-size: 12px; color: var(--gold); margin-top: 15px; min-height: 18px; }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes heartBeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.12); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.12); }
+    70% { transform: scale(1); }
+  }
 </style>
 </head>
 <body>
 
-  <div class="date-header">Saturday, April 18, 2026</div>
-  <h1>Duleep & Marita</h1>
-  <p class="tagline">Share your moments with us</p>
+<!-- --- WELCOME ENTRANCE SCREEN --- -->
+<div class="welcome-overlay" id="welcome_overlay">
+  <div class="welcome-monogram-container">
+    <svg class="welcome-wreath" viewBox="0 0 100 100">
+      <path d="M 50,92 C 26,90 8,72 8,50 C 8,28 26,10 50,8" />
+      <path d="M 50,92 C 74,90 92,72 92,50 C 92,28 74,10 50,8" />
+      <path d="M 12,65 Q 16,62 14,58 Q 10,61 12,65 Z" fill="var(--accent)" />
+      <path d="M 10,48 Q 14,46 13,42 Q 9,44 10,48 Z" fill="var(--accent)" />
+      <path d="M 14,32 Q 19,30 18,26 Q 13,28 14,32 Z" fill="var(--accent)" />
+      <path d="M 23,20 Q 28,18 26,14 Q 21,16 23,20 Z" fill="var(--accent)" />
+      <path d="M 37,11 Q 41,8 39,5 Q 35,7 37,11 Z" fill="var(--accent)" />
+      <path d="M 88,65 Q 84,62 86,58 Q 90,61 88,65 Z" fill="var(--accent)" />
+      <path d="M 90,48 Q 86,46 87,42 Q 91,44 90,48 Z" fill="var(--accent)" />
+      <path d="M 86,32 Q 81,30 82,26 Q 87,28 86,32 Z" fill="var(--accent)" />
+      <path d="M 77,20 Q 72,18 74,14 Q 79,16 77,20 Z" fill="var(--accent)" />
+      <path d="M 63,11 Q 59,8 61,5 Q 65,7 63,11 Z" fill="var(--accent)" />
+    </svg>
+    <div class="welcome-letters">D&M</div>
+  </div>
+  <div class="welcome-subtitle">You Are Cordially Invited</div>
+  <h2 class="welcome-title">Duleep <span class="and">and</span> Marita's</h2>
+  <p class="welcome-invite-text">Wedding Celebration & Photo Gallery</p>
+  <button class="welcome-btn" onclick="enterInvitation()">Enter Invitation</button>
+</div>
 
-  <div class="upload-container">
-    <button id="upload_btn">
-      <div class="btn-icon">⊕</div>
-      <div class="btn-text">TAP TO UPLOAD PHOTOS</div>
-    </button>
-    <div id="status"></div>
+<!-- --- BACKGROUND SNOW CANVAS --- -->
+<canvas id="snowflake_canvas"></canvas>
+
+
+<!-- --- MAIN SCROLL CONTAINER --- -->
+<div class="scroll-wrapper">
+
+  <!-- Scroll Top Roller Handle (SVG) -->
+  <div class="scroll-roller scroll-roller-top">
+    <svg class="scroll-bar-svg" viewBox="0 0 800 30" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="gold-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#735A2A" />
+          <stop offset="35%" stop-color="#E1BF7D" />
+          <stop offset="50%" stop-color="#FCEFD7" />
+          <stop offset="65%" stop-color="#E1BF7D" />
+          <stop offset="100%" stop-color="#735A2A" />
+        </linearGradient>
+      </defs>
+      <!-- Rod -->
+      <rect x="25" y="6" width="750" height="18" rx="4" fill="url(#gold-grad)" />
+      <!-- Ornate Left Scroll Knob -->
+      <circle cx="16" cy="15" r="13" fill="url(#gold-grad)" stroke="#221113" stroke-width="1.5" />
+      <circle cx="16" cy="15" r="6" fill="#4B3B1B" />
+      <rect x="0" y="10" width="8" height="10" rx="1.5" fill="url(#gold-grad)" />
+      <!-- Ornate Right Scroll Knob -->
+      <circle cx="784" cy="15" r="13" fill="url(#gold-grad)" stroke="#221113" stroke-width="1.5" />
+      <circle cx="784" cy="15" r="6" fill="#4B3B1B" />
+      <rect x="792" y="10" width="8" height="10" rx="1.5" fill="url(#gold-grad)" />
+    </svg>
   </div>
 
-  <div class="gallery-section">
-    <div class="gallery-grid" id="gallery">
+  <!-- The Parchment scroll itself -->
+  <div class="scroll-body">
+
+    <!-- --- HERO SECTION --- -->
+    <header class="hero">
+      <div class="monogram-container">
+        <svg class="wreath-svg" viewBox="0 0 100 100">
+          <path d="M 50,92 C 26,90 8,72 8,50 C 8,28 26,10 50,8" />
+          <path d="M 50,92 C 74,90 92,72 92,50 C 92,28 74,10 50,8" />
+          <path d="M 12,65 Q 16,62 14,58 Q 10,61 12,65 Z" fill="var(--accent)" />
+          <path d="M 10,48 Q 14,46 13,42 Q 9,44 10,48 Z" fill="var(--accent)" />
+          <path d="M 14,32 Q 19,30 18,26 Q 13,28 14,32 Z" fill="var(--accent)" />
+          <path d="M 23,20 Q 28,18 26,14 Q 21,16 23,20 Z" fill="var(--accent)" />
+          <path d="M 37,11 Q 41,8 39,5 Q 35,7 37,11 Z" fill="var(--accent)" />
+          <path d="M 88,65 Q 84,62 86,58 Q 90,61 88,65 Z" fill="var(--accent)" />
+          <path d="M 90,48 Q 86,46 87,42 Q 91,44 90,48 Z" fill="var(--accent)" />
+          <path d="M 86,32 Q 81,30 82,26 Q 87,28 86,32 Z" fill="var(--accent)" />
+          <path d="M 77,20 Q 72,18 74,14 Q 79,16 77,20 Z" fill="var(--accent)" />
+          <path d="M 63,11 Q 59,8 61,5 Q 65,7 63,11 Z" fill="var(--accent)" />
+        </svg>
+        <div class="monogram">D&M</div>
       </div>
+      <div class="hero-subtitle">Wedding Update</div>
+      <h1>Duleep <span class="and-connector">&</span> Marita</h1>
+      <p class="tagline">Celebrating our love in a warm, coastal paradise. We cannot wait to share these precious moments with you.</p>
+    </header>
+
+    <!-- --- LIVE COUNTDOWN TIMER --- -->
+    <div class="countdown" id="countdown">
+      <div class="countdown-item">
+        <div class="countdown-number" id="days">00</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-separator">:</div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="hours">00</div>
+        <div class="countdown-label">Hrs</div>
+      </div>
+      <div class="countdown-separator">:</div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="mins">00</div>
+        <div class="countdown-label">Mins</div>
+      </div>
+      <div class="countdown-separator">:</div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="secs">00</div>
+        <div class="countdown-label">Secs</div>
+      </div>
+    </div>
+
+    <!-- --- BIBLE SCRIPTURE CENTERPIECE --- -->
+    <div class="scripture-container">
+      <div class="scripture-quote">
+        "I will sing of the Lord’s great love forever;<br>
+        with my mouth I will make your faithfulness known through all generations.<br><br>
+        I will declare that your love stands firm forever,<br>
+        that you have established your faithfulness in heaven itself.<br><br>
+        You said, 'I have made a covenant with my chosen one...'"
+      </div>
+      <div class="scripture-reference">Psalms 89:1-3</div>
+    </div>
+
+    <!-- --- ORDER OF CELEBRATION TIMELINE --- -->
+    <section class="itinerary-section">
+      <div class="section-divider">
+        <div class="line"></div>
+        <div class="title">Order of Celebration</div>
+        <div class="line"></div>
+      </div>
+
+      <div class="itinerary-grid">
+        <!-- THE SACRED CEREMONY -->
+        <div class="itinerary-column">
+          <h3 class="itinerary-col-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="col-icon"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/><path d="M6 6h10M6 10h10"/></svg>
+            The Ceremony
+          </h3>
+          <div class="itinerary-timeline">
+            <div class="timeline-item">
+              <div class="time-stamp">5:00 PM</div>
+              <div class="timeline-content">
+                <h4>Seating of Guests</h4>
+                <p>Welcome and quiet reflection as we gather.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">The Officiants</div>
+              <div class="timeline-content">
+                <h4>The Ceremony Commences</h4>
+                <p><strong>Officiated by:</strong> Ps. Meharajh Dahalan</p>
+                <p><strong>Assisted by:</strong> Sister Sharon</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">Praise</div>
+              <div class="timeline-content">
+                <h4>Songs of Praise</h4>
+                <p>Led by <strong>Duleep Chanmugam & Worship Team</strong></p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">Procession</div>
+              <div class="timeline-content">
+                <h4>Bridal Procession</h4>
+                <p>The entrance of the Bride - Angel with Bells</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">The Pledge</div>
+              <div class="timeline-content">
+                <h4>The Marriage Pledge</h4>
+                <p>Exchanging of vows officiated by Ps. Meharajh Dahalan</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">Scripture</div>
+              <div class="timeline-content">
+                <h4>Scripture Reading</h4>
+                <p>Holy Scripture shared by <strong>Subha Grassi</strong></p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">Solemnization</div>
+              <div class="timeline-content">
+                <h4>Solemnization & Pronouncement</h4>
+                <p>The signing of the register and pronouncement as husband and wife.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">Benediction</div>
+              <div class="timeline-content">
+                <h4>Prayer of Blessing & Benediction</h4>
+                <p>Solemn blessings over the newly wedded couple.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">Recessional</div>
+              <div class="timeline-content">
+                <h4>Recessional</h4>
+                <p>Recessional followed by celebratory photographs at the beach.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- THE RECEPTION -->
+        <div class="itinerary-column">
+          <h3 class="itinerary-col-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="col-icon"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"/><path d="M12 6v6l4 2"/></svg>
+            The Reception
+          </h3>
+          <div class="itinerary-timeline">
+            <div class="timeline-item">
+              <div class="time-stamp">Reception</div>
+              <div class="timeline-content">
+                <h4>Dinner is Served</h4>
+                <p>A delicious gourmet coastal feast celebrating the Bride & Groom.</p>
+                <div class="food-highlight">
+                  <strong>Action Stations:</strong> Egg Hoppers & Kottu
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">Ceremony</div>
+              <div class="timeline-content">
+                <h4>Cake Ceremony</h4>
+                <p>Cutting of the wedding cake with our families and friends.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">Speeches</div>
+              <div class="timeline-content">
+                <h4>Congratulatory Speeches</h4>
+                <p>Heartfelt messages, toasts, and blessings from our loved ones.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">Blessing</div>
+              <div class="timeline-content">
+                <h4>Closing Blessing</h4>
+                <p>A final prayer of thanksgiving to conclude the formal schedule.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time-stamp">Dancing</div>
+              <div class="timeline-content">
+                <h4>Celebration & Dancing</h4>
+                <p>Dancing, joyful music, and starry-sky beach celebrations to conclude the night!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- --- EVENT DETAILS CARD STACKS --- -->
+    <div class="details-grid">
+      
+      <!-- CARD 1: THE VENUE -->
+      <div class="details-card">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 18h20"/><path d="M12 2v14"/><path d="m17 7-5-5-5 5"/><path d="M4 22h16"/></svg>
+        </div>
+        <h3 class="card-title">The Celebration</h3>
+        <p class="card-text highlight">Saturday, May 16, 2026</p>
+        <p class="card-text">Arrival time: 5:00 PM</p>
+        <p class="card-text" style="font-weight: 500; color: var(--primary);">La Langoustrie Beach Restaurant</p>
+        <a class="maps-btn" href="https://www.google.com/maps/search/?api=1&query=La+Langoustrie+beach+restaurant" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Map Directions
+        </a>
+      </div>
+
+      <!-- CARD 2: ATTIRE -->
+      <div class="details-card">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+        </div>
+        <h3 class="card-title">Wedding Attire</h3>
+        <p class="card-text highlight">Khaki & Festive</p>
+        <p class="card-text">Sandy neutrals, airy fabrics, elegant linen, and celebratory beach-chic elegance.</p>
+        <div class="swatches">
+          <div class="swatch" style="background: #EAE6D9;" data-label="Sand"></div>
+          <div class="swatch" style="background: #C2B29A;" data-label="Khaki"></div>
+          <div class="swatch" style="background: #A2B59F;" data-label="Sage"></div>
+          <div class="swatch" style="background: #DFB29B;" data-label="Terracotta"></div>
+          <div class="swatch" style="background: #543735;" data-label="Rosewood"></div>
+        </div>
+      </div>
+
+      <!-- CARD 3: HIGHLIGHTS & BYOB -->
+      <div class="details-card">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8h.01"/><path d="M8 12h.01"/><path d="M16 12h.01"/><path d="M12 16h.01"/><path d="M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16z"/></svg>
+        </div>
+        <h3 class="card-title">Important Details</h3>
+        <ul class="card-list">
+          <li>
+            <svg class="bullet-svg"><path d="M1 7.5L5 11L13 1" stroke-width="2" stroke-linecap="round"/></svg>
+            <span><strong>BYOB</strong>: Bring your own special bottle to toast the evening away!</span>
+          </li>
+          <li>
+            <svg class="bullet-svg"><path d="M1 7.5L5 11L13 1" stroke-width="2" stroke-linecap="round"/></svg>
+            <span><strong>Kids Activity Table</strong>: Dedicated games & coloring fun for children!</span>
+          </li>
+          <li>
+            <svg class="bullet-svg"><path d="M1 7.5L5 11L13 1" stroke-width="2" stroke-linecap="round"/></svg>
+            <span><strong>Future Updates</strong>: More wedding details will be forthcoming.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- --- INTERACTIVE RSVP & MEDIA PORTALS --- -->
+    <div class="interactive-area">
+      
+      <!-- RSVP FORM -->
+      <section class="rsvp-card">
+        <div class="rsvp-header">
+          <h3 class="card-title">Will You Join Us?</h3>
+          <p class="card-text">Please RSVP to let the Bride & Groom know if you will be celebrating with them!</p>
+        </div>
+
+        <div class="rsvp-form-container" id="rsvp_form_wrapper">
+          <form id="rsvp_form">
+            <div class="form-group">
+              <label class="form-label" for="guest_name">Full Name</label>
+              <input type="text" id="guest_name" class="form-input" placeholder="e.g. John & Sarah Doe" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Attendance Status</label>
+              <div class="attendance-toggle">
+                <button type="button" class="toggle-btn" id="btn_accept">
+                  <span class="circle-check"></span>
+                  Accepts Joyfully
+                </button>
+                <button type="button" class="toggle-btn" id="btn_decline">
+                  <span class="circle-check"></span>
+                  Declines Regretfully
+                </button>
+              </div>
+            </div>
+
+            <!-- Slide-out guest count selector -->
+            <div class="form-group guest-count-container" id="guest_count_box">
+              <label class="form-label" for="guest_count">Number of Attending Guests</label>
+              <input type="number" id="guest_count" class="form-input" min="1" max="10" value="1" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="guest_notes">Dietary Alerts or Sweet Message</label>
+              <textarea id="guest_notes" class="form-input" rows="3" placeholder="Any dietary needs or a celebratory note to Duleep & Marita..." style="resize: none;"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="rsvp_submit">Submit RSVP</button>
+          </form>
+        </div>
+
+        <!-- Success message container -->
+        <div class="rsvp-success-container" id="rsvp_success">
+          <div class="success-heart">♥</div>
+          <h4 class="card-title" style="margin-bottom: 10px;">Thank You!</h4>
+          <p class="card-text" id="success_message">Your response has been saved. Duleep & Marita are so excited to celebrate with you!</p>
+          <button class="btn-outline" style="margin-top: 25px;" onclick="resetRSVPForm()">Update My Response</button>
+        </div>
+      </section>
+
+      <!-- PHOTO SHARING ZONE -->
+      <section class="upload-box-card" style="margin-top: 30px;">
+        <div class="rsvp-header" style="margin-bottom: 25px;">
+          <h3 class="card-title">Share Your Moments</h3>
+          <p class="card-text">Upload your photos to help us capture every single beautiful memory of our wedding weekend!</p>
+        </div>
+
+        <button id="upload_btn">
+          <div class="btn-icon">⊕</div>
+          <div class="btn-text">Tap To Upload Photos</div>
+          <div class="upload-hint">JPG, PNG, HEIC up to 15MB</div>
+        </button>
+        <div id="status"></div>
+      </section>
+
+    </div>
+
+
+    <!-- --- PHOTO GALLERY ZONE --- -->
+    <section class="gallery-section">
+      <div class="section-divider">
+        <div class="line"></div>
+        <div class="title">Our Shared Gallery</div>
+        <div class="line"></div>
+      </div>
+      
+      <div class="gallery-grid" id="gallery">
+        <!-- Loaded via JavaScript -->
+      </div>
+    </section>
+
+    <!-- --- FOOTER --- -->
+    <footer>
+      <p class="footer-love">With Love, Duleep & Marita</p>
+      <p class="card-text" style="font-size: 11px;">Saturday, May 16, 2026 • La Langoustrie</p>
+      
+      <a class="dashboard-entry-link" id="admin_trigger">
+        <svg viewBox="0 0 24 24" width="12" height="12"><path d="M12 15c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-4V7c0-3.3-2.7-6-6-6S6 3.7 6 7v4H4v11h16V11h-2zM8 7c0-2.2 1.8-4 4-4s4 1.8 4 4v4H8V7z"/></svg>
+        Couple's Admin Portal
+      </a>
+    </footer>
+
   </div>
 
+  <!-- Scroll Bottom Roller Handle (SVG) -->
+  <div class="scroll-roller scroll-roller-bottom">
+    <svg class="scroll-bar-svg" viewBox="0 0 800 30" preserveAspectRatio="none">
+      <!-- Rod -->
+      <rect x="25" y="6" width="750" height="18" rx="4" fill="url(#gold-grad)" />
+      <!-- Ornate Left Scroll Knob -->
+      <circle cx="16" cy="15" r="13" fill="url(#gold-grad)" stroke="#221113" stroke-width="1.5" />
+      <circle cx="16" cy="15" r="6" fill="#4B3B1B" />
+      <rect x="0" y="10" width="8" height="10" rx="1.5" fill="url(#gold-grad)" />
+      <!-- Ornate Right Scroll Knob -->
+      <circle cx="784" cy="15" r="13" fill="url(#gold-grad)" stroke="#221113" stroke-width="1.5" />
+      <circle cx="784" cy="15" r="6" fill="#4B3B1B" />
+      <rect x="792" y="10" width="8" height="10" rx="1.5" fill="url(#gold-grad)" />
+    </svg>
+  </div>
+
+</div>
+
+
+<!-- --- INTERACTIVE MODAL OVERLAYS --- -->
+
+<!-- Lightbox Modal -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox_close">×</button>
+  <button class="lightbox-nav lightbox-prev" id="lightbox_prev">‹</button>
+  <div class="lightbox-content">
+    <img src="" class="lightbox-img" id="lightbox_img" alt="Enlarged gallery photo" />
+  </div>
+  <button class="lightbox-nav lightbox-next" id="lightbox_next">›</button>
+</div>
+
+<!-- Password Entry Screen -->
+<div class="modal-overlay" id="password_modal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closePasswordModal()">×</button>
+    <h3 class="card-title" style="margin-bottom: 10px;">Couple's Portal</h3>
+    <p class="card-text" style="margin-bottom: 20px;">Enter your wedding passcode to access guest RSVPs.</p>
+    <div class="form-group">
+      <input type="password" id="admin_password" class="form-input" placeholder="Enter password" style="text-align: center;" />
+    </div>
+    <div id="password_error" style="color: #E74C3C; font-size: 11px; margin-top: -10px; margin-bottom: 15px; display: none;">Incorrect Passcode</div>
+    <button class="submit-btn" onclick="verifyAdminPasscode()">Unlock Dashboard</button>
+  </div>
+</div>
+
+<!-- Couple's RSVP Dashboard -->
+<div class="admin-dashboard-modal" id="admin_dashboard">
+  <div class="dashboard-card">
+    <div class="dashboard-header">
+      <h3 class="dashboard-title">RSVP Guestlist Dashboard</h3>
+      <button class="btn-outline" onclick="closeDashboard()">Close Dashboard</button>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-val" id="stat_total">0</div>
+        <div class="stat-lbl">Responses</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" style="color: var(--sage);" id="stat_attending">0</div>
+        <div class="stat-lbl">Attending</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" style="color: #E74C3C;" id="stat_declining">0</div>
+        <div class="stat-lbl">Declining</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" style="color: var(--primary);" id="stat_guests">0</div>
+        <div class="stat-lbl">Total Guests</div>
+      </div>
+    </div>
+
+    <!-- RSVP Guestlist Table -->
+    <div class="table-container">
+      <table id="rsvp_table">
+        <thead>
+          <tr>
+            <th>Guest Name</th>
+            <th>RSVP Status</th>
+            <th>Party Size</th>
+            <th>Dietary / Notes</th>
+            <th>Date Saved</th>
+          </tr>
+        </thead>
+        <tbody id="rsvp_table_body">
+          <!-- Populated dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Controls -->
+    <div class="dashboard-actions">
+      <button class="btn-outline" onclick="exportRSVPsCSV()">Export CSV Spreadsheet</button>
+      <button class="btn-outline" onclick="copyRSVPsToClipboard()">Copy to Clipboard</button>
+      <button class="btn-danger" onclick="clearRSVPsData()">Clear RSVP Database</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- --- CORE APPLICATION SCRIPTS --- -->
 <script src="https://upload-widget.cloudinary.com/global/all.js"></script>
 
 <script>
+  // --- WELCOME SCREEN TOGGLE ---
+  function enterInvitation() {
+    const overlay = document.getElementById("welcome_overlay");
+    overlay.classList.add("fade-out");
+    // Start playing background snow physics if it was paused or throttled
+  }
+
+
+  // --- LIVE HIGH-PERFORMANCE BACKGROUND SNOW SYSTEM ---
+  const canvas = document.getElementById("snowflake_canvas");
+  const ctx = canvas.getContext("2d");
+
+  let snowflakes = [];
+  const maxSnowflakes = 55; // Perfect balance of atmospheric flakes & perfect visual text readability
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  // Snowflake Class Object
+  class Snowflake {
+    constructor() {
+      this.reset();
+      this.y = Math.random() * canvas.height; // Scatter across screen initially
+    }
+
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = -10;
+      this.radius = Math.random() * 2.5 + 0.8; // Soft, delicate sizing (0.8px to 3.3px)
+      this.speedY = Math.random() * 0.7 + 0.3; // Normal natural rate of descent (0.3 to 1.0 px/frame)
+      this.density = Math.random() * 15 + 2;   // Wind resistance
+      this.opacity = Math.random() * 0.5 + 0.2; // Soft translucent values (0.2 to 0.7 opacity)
+      this.angle = Math.random() * 360;        // Wind angle drift
+    }
+
+    update() {
+      this.y += this.speedY;
+      // Swaying drift
+      this.angle += 0.01;
+      this.x += Math.sin(this.angle) * 0.35;
+
+      // Reset flake if it drifts out of view
+      if (this.y > canvas.height + 10 || this.x > canvas.width + 10 || this.x < -10) {
+        this.reset();
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(245, 211, 147, ${this.opacity})`; // Soft golden/white snow glow
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Populate
+  for (let i = 0; i < maxSnowflakes; i++) {
+    snowflakes.push(new Snowflake());
+  }
+
+  // Live Anim Loop at 60fps
+  function animateSnow() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < snowflakes.length; i++) {
+      snowflakes[i].update();
+      snowflakes[i].draw();
+    }
+    requestAnimationFrame(animateSnow);
+  }
+  animateSnow();
+
+
+  // --- REAL-TIME COUNTDOWN TIMER ---
+  // Wedding Date & Time: Saturday, May 16, 2026 at 5:00 PM (17:00:00)
+  const weddingDate = new Date("May 16, 2026 17:00:00").getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+
+    if (distance < 0) {
+      document.getElementById("countdown").innerHTML = "<div class='countdown-number' style='font-size: 16px; color: var(--primary); letter-spacing: 1px;'>THE CELEBRATION HAS BEGUN!</div>";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = days.toString().padStart(2, '0');
+    document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+    document.getElementById("mins").innerText = minutes.toString().padStart(2, '0');
+    document.getElementById("secs").innerText = seconds.toString().padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+
+  // --- API BACKEND BASE URL CONFIGURATION ---
+  const API_BASE = (window.location.protocol === 'file:' || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port !== '3000') 
+    ? 'http://localhost:3000' 
+    : '';
+
+  // --- INTERACTIVE RSVP SYSTEM & BACKEND INTEGRATION ---
+  let selectedStatus = "";
+
+  const btnAccept = document.getElementById("btn_accept");
+  const btnDecline = document.getElementById("btn_decline");
+  const guestCountBox = document.getElementById("guest_count_box");
+  const guestCountInput = document.getElementById("guest_count");
+  const rsvpForm = document.getElementById("rsvp_form");
+  const rsvpFormWrapper = document.getElementById("rsvp_form_wrapper");
+  const rsvpSuccess = document.getElementById("rsvp_success");
+  const successMessage = document.getElementById("success_message");
+
+  btnAccept.addEventListener("click", () => {
+    selectedStatus = "accept";
+    btnAccept.classList.add("active");
+    btnDecline.classList.remove("active");
+    guestCountBox.classList.add("show");
+    guestCountInput.required = true;
+    if (parseInt(guestCountInput.value) < 1) guestCountInput.value = 1;
+  });
+
+  btnDecline.addEventListener("click", () => {
+    selectedStatus = "decline";
+    btnDecline.classList.add("active");
+    btnAccept.classList.remove("active");
+    guestCountBox.classList.remove("show");
+    guestCountInput.required = false;
+  });
+
+  function checkExistingRSVP() {
+    const existing = localStorage.getItem("my_wedding_rsvp");
+    if (existing) {
+      const data = JSON.parse(existing);
+      rsvpFormWrapper.style.display = "none";
+      rsvpSuccess.style.display = "block";
+      if (data.attending === "accept") {
+        successMessage.innerText = `You are registered! Duleep & Marita are so thrilled to celebrate with you (Party size: ${data.guests}). See you on May 16th!`;
+      } else {
+        successMessage.innerText = "Thank you for sending your warm wishes. Duleep & Marita will miss your presence but appreciate your celebration from afar!";
+      }
+    } else {
+      rsvpFormWrapper.style.display = "block";
+      rsvpSuccess.style.display = "none";
+    }
+  }
+
+  rsvpForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!selectedStatus) {
+      alert("Please select if you can attend (Accepts or Declines).");
+      return;
+    }
+
+    const name = document.getElementById("guest_name").value.trim();
+    const guests = selectedStatus === "accept" ? parseInt(guestCountInput.value) : 0;
+    const notes = document.getElementById("guest_notes").value.trim();
+
+    const rsvpSubmitBtn = document.getElementById("rsvp_submit");
+    const originalBtnText = rsvpSubmitBtn.innerText;
+    rsvpSubmitBtn.disabled = true;
+    rsvpSubmitBtn.innerText = "SUBMITTING...";
+
+    try {
+      const res = await fetch(`${API_BASE}/api/rsvp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, attending: selectedStatus, guests, notes })
+      });
+
+      const result = await res.json();
+      
+      if (!res.ok || !result.success) {
+        throw new Error(result.error || "Submission failed");
+      }
+
+      // Sync local representation for user persistence
+      localStorage.setItem("my_wedding_rsvp", JSON.stringify(result.rsvp));
+
+      rsvpFormWrapper.style.opacity = 0;
+      setTimeout(() => {
+        rsvpFormWrapper.style.display = "none";
+        rsvpSuccess.style.display = "block";
+        if (selectedStatus === "accept") {
+          successMessage.innerText = `You are registered! Duleep & Marita are so thrilled to celebrate with you (Party size: ${guests}). See you on May 16th!`;
+        } else {
+          successMessage.innerText = "Thank you for sending your warm wishes. Duleep & Marita will miss your presence but appreciate your celebration from afar!";
+        }
+      }, 400);
+
+    } catch (err) {
+      alert(`Oops! RSVP saving failed: ${err.message}. Please try again!`);
+      rsvpSubmitBtn.disabled = false;
+      rsvpSubmitBtn.innerText = originalBtnText;
+    }
+  });
+
+  window.resetRSVPForm = function() {
+    localStorage.removeItem("my_wedding_rsvp");
+    document.getElementById("guest_name").value = "";
+    document.getElementById("guest_notes").value = "";
+    selectedStatus = "";
+    btnAccept.classList.remove("active");
+    btnDecline.classList.remove("active");
+    guestCountBox.classList.remove("show");
+    guestCountInput.value = "1";
+
+    rsvpSuccess.style.display = "none";
+    rsvpFormWrapper.style.display = "block";
+    rsvpFormWrapper.style.opacity = 1;
+  };
+
+  checkExistingRSVP();
+
+
+  // --- CLOUDINARY UPLOAD WIDGET & GALLERY ---
   const galleryEl = document.getElementById('gallery');
   const statusEl = document.getElementById('status');
+  let loadedImages = [];
 
-  // Load photos tagged with 'wedding'
   async function loadGallery() {
-    // This timestamp forces Cloudinary to bypass the cache and show deletions instantly
     const cacheBuster = new Date().getTime();
     const url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/v${cacheBuster}/wedding.json`;
     
     try {
       const res = await fetch(url);
       
-      // If the response is not 200 (usually because no images exist with that tag)
       if (!res.ok) {
-        galleryEl.innerHTML = "";
+        galleryEl.innerHTML = `
+          <div class="no-data" style="grid-column: 1 / -1; background: var(--card-bg); border-radius: var(--radius); border: 1px dashed rgba(209, 168, 92, 0.2);">
+            No photos uploaded yet. Tap above to be the very first to share a memory!
+          </div>`;
         return;
       }
 
       const data = await res.json();
       
       if (data.resources && data.resources.length > 0) {
-        galleryEl.innerHTML = data.resources.map(img => `
-          <img src="https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_600,h_600,g_auto/v${img.version}/${img.public_id}.${img.format}" />
+        loadedImages = data.resources.map(img => `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/v${img.version}/${img.public_id}.${img.format}`);
+        
+        galleryEl.innerHTML = data.resources.map((img, index) => `
+          <div class="polaroid" onclick="openLightbox(${index})">
+            <div class="polaroid-img-container">
+              <img src="https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_500,h_500,g_auto/v${img.version}/${img.public_id}.${img.format}" alt="Wedding memory" loading="lazy" />
+            </div>
+          </div>
         `).join('');
       } else {
-        // Clear gallery if data comes back empty
-        galleryEl.innerHTML = "";
+        galleryEl.innerHTML = `
+          <div class="no-data" style="grid-column: 1 / -1; background: var(--card-bg); border-radius: var(--radius); border: 1px dashed rgba(209, 168, 92, 0.2);">
+            No photos uploaded yet. Tap above to be the very first to share a memory!
+          </div>`;
       }
     } catch (e) {
-      // If the fetch fails entirely
-      galleryEl.innerHTML = "";
-      console.log("Gallery reset: No images found.");
+      galleryEl.innerHTML = `
+        <div class="no-data" style="grid-column: 1 / -1; background: var(--card-bg); border-radius: var(--radius); border: 1px dashed rgba(209, 168, 92, 0.2);">
+          No photos uploaded yet. Tap above to be the very first to share a memory!
+        </div>`;
+      console.log("Gallery loader: No images tagged 'wedding' found.");
     }
   }
 
-  // Initialize Cloudinary Widget
   var myWidget = cloudinary.createUploadWidget({
     cloudName: CLOUD_NAME, 
     uploadPreset: UPLOAD_PRESET,
@@ -177,22 +2344,22 @@
     maxFileSize: 15000000, 
     styles: {
       palette: {
-        window: "#FAF7F2",
-        sourceBg: "#FAF7F2",
-        windowBorder: "#B8903A",
-        tabIcon: "#3E1520",
-        textDark: "#2A160E",
+        window: "#160D10",
+        sourceBg: "#160D10",
+        windowBorder: "#D1A85C",
+        tabIcon: "#F5D393",
+        textDark: "#F2ECE1",
         textLight: "#FFFFFF",
-        mainIcons: "#3E1520",
-        link: "#B8903A",
-        action: "#3E1520",
-        inProgress: "#D4AC5A",
-        complete: "#B8903A"
+        mainIcons: "#F5D393",
+        link: "#D1A85C",
+        action: "#F5D393",
+        inProgress: "#D1A85C",
+        complete: "#F5D393"
       }
     }
   }, (error, result) => { 
     if (result.event === "success") { 
-      statusEl.innerText = "Syncing with gallery...";
+      statusEl.innerText = "Memory captured! Adding to gallery...";
       setTimeout(() => {
         statusEl.innerText = "";
         loadGallery(); 
@@ -201,9 +2368,277 @@
   });
 
   document.getElementById("upload_btn").addEventListener("click", () => myWidget.open());
-
-  // Initial load
   loadGallery();
+
+
+  // --- LIGHTBOX SYSTEM WITH TOUCH SWIPE ---
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox_img");
+  const lightboxClose = document.getElementById("lightbox_close");
+  const lightboxPrev = document.getElementById("lightbox_prev");
+  const lightboxNext = document.getElementById("lightbox_next");
+  let currentLightboxIndex = 0;
+
+  window.openLightbox = function(index) {
+    currentLightboxIndex = index;
+    lightboxImg.src = loadedImages[index];
+    lightbox.classList.add("show");
+    document.body.style.overflow = "hidden";
+  };
+
+  function closeLightbox() {
+    lightbox.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+
+  function nextLightbox() {
+    currentLightboxIndex = (currentLightboxIndex + 1) % loadedImages.length;
+    lightboxImg.src = loadedImages[currentLightboxIndex];
+  }
+
+  function prevLightbox() {
+    currentLightboxIndex = (currentLightboxIndex - 1 + loadedImages.length) % loadedImages.length;
+    lightboxImg.src = loadedImages[currentLightboxIndex];
+  }
+
+  lightboxClose.addEventListener("click", closeLightbox);
+  lightboxNext.addEventListener("click", nextLightbox);
+  lightboxPrev.addEventListener("click", prevLightbox);
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // Mobile Touch Swipe Gesture Detection
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  lightbox.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  lightbox.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipeGesture();
+  }, { passive: true });
+
+  function handleSwipeGesture() {
+    const swipeThreshold = 55;
+    if (touchEndX < touchStartX - swipeThreshold) {
+      nextLightbox(); // Swipe Left -> Next
+    }
+    if (touchEndX > touchStartX + swipeThreshold) {
+      prevLightbox(); // Swipe Right -> Prev
+    }
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("show")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowRight") nextLightbox();
+    if (e.key === "ArrowLeft") prevLightbox();
+  });
+
+
+  // --- HIDDEN ADMIN COUPLES PORTAL ---
+  const adminTrigger = document.getElementById("admin_trigger");
+  const passwordModal = document.getElementById("password_modal");
+  const adminPasswordInput = document.getElementById("admin_password");
+  const passwordError = document.getElementById("password_error");
+  const adminDashboard = document.getElementById("admin_dashboard");
+
+  adminTrigger.addEventListener("click", (e) => {
+    e.preventDefault();
+    openPasswordModal();
+  });
+
+  window.openPasswordModal = function() {
+    passwordModal.style.display = "flex";
+    adminPasswordInput.value = "";
+    passwordError.style.display = "none";
+    adminPasswordInput.focus();
+  };
+
+  window.closePasswordModal = function() {
+    passwordModal.style.display = "none";
+  };
+
+  adminPasswordInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") verifyAdminPasscode();
+  });
+
+  let activePasscode = ""; // Safe copy for verifying backend access
+  let globalLoadedRSVPs = []; // Globally cached records for copy/export operations
+
+  window.verifyAdminPasscode = function() {
+    const pw = adminPasswordInput.value.trim();
+    if (pw === "marita2026" || pw === "love") {
+      activePasscode = pw;
+      passwordModal.style.display = "none";
+      openAdminDashboard();
+    } else {
+      passwordError.style.display = "block";
+      adminPasswordInput.select();
+    }
+  };
+
+  window.openAdminDashboard = function() {
+    adminDashboard.style.display = "flex";
+    renderDashboardData();
+  };
+
+  window.closeDashboard = function() {
+    adminDashboard.style.display = "none";
+  };
+
+  async function renderDashboardData() {
+    const tbody = document.getElementById("rsvp_table_body");
+    tbody.innerHTML = `<tr><td colspan="5" class="no-data">Syncing with server database...</td></tr>`;
+
+    try {
+      const res = await fetch(`${API_BASE}/api/rsvps?passcode=${activePasscode}`);
+      const result = await res.json();
+
+      if (!res.ok || !result.success) {
+        throw new Error(result.error || "Loading failed.");
+      }
+
+      const rsvps = result.rsvps;
+      globalLoadedRSVPs = rsvps; // Keep locally synced
+
+      rsvps.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+      const totalResponses = rsvps.length;
+      const attendingCount = rsvps.filter(r => r.attending === "accept").length;
+      const decliningCount = totalResponses - attendingCount;
+      const totalGuestsCount = rsvps.reduce((acc, curr) => acc + curr.guests, 0);
+
+      document.getElementById("stat_total").innerText = totalResponses;
+      document.getElementById("stat_attending").innerText = attendingCount;
+      document.getElementById("stat_declining").innerText = decliningCount;
+      document.getElementById("stat_guests").innerText = totalGuestsCount;
+
+      if (rsvps.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="no-data">No RSVP responses received yet on the database.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = rsvps.map(r => `
+        <tr>
+          <td style="font-weight: 600; color: var(--primary);">${escapeHTML(r.name)}</td>
+          <td>
+            <span class="badge ${r.attending === 'accept' ? 'badge-yes' : 'badge-no'}">
+              ${r.attending === 'accept' ? 'Attending' : 'Declining'}
+            </span>
+          </td>
+          <td style="font-weight: 500;">${r.attending === 'accept' ? r.guests : '-'}</td>
+          <td style="color: var(--text-muted); max-width: 250px; font-style: ${r.notes ? 'normal' : 'italic'};">
+            ${r.notes ? escapeHTML(r.notes) : 'None'}
+          </td>
+          <td style="font-size: 11px; color: var(--text-muted);">${r.timestamp}</td>
+        </tr>
+      `).join('');
+
+    } catch (err) {
+      tbody.innerHTML = `<tr><td colspan="5" class="no-data" style="color: #E74C3C;">Error loading guest database: ${err.message}</td></tr>`;
+    }
+  }
+
+  window.copyRSVPsToClipboard = function() {
+    const rsvps = globalLoadedRSVPs;
+    if (rsvps.length === 0) {
+      alert("No RSVP database records to copy!");
+      return;
+    }
+
+    let text = "Guest Name\tStatus\tParty Size\tDietary / Notes\tTimestamp\n";
+    rsvps.forEach(r => {
+      text += `${r.name}\t${r.attending === 'accept' ? 'Attending' : 'Declined'}\t${r.guests}\t${(r.notes || '').replace(/\s+/g, ' ')}\t${r.timestamp}\n`;
+    });
+
+    navigator.clipboard.writeText(text).then(() => {
+      alert("RSVP Database Table copied to clipboard! You can paste it directly into Excel or Google Sheets.");
+    }).catch(err => {
+      console.error("Clipboard copy failed", err);
+    });
+  };
+
+  window.exportRSVPsCSV = function() {
+    const rsvps = globalLoadedRSVPs;
+    if (rsvps.length === 0) {
+      alert("No RSVP database records to export!");
+      return;
+    }
+
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Guest Name,Status,Party Size,Dietary and Notes,Timestamp\n";
+    
+    rsvps.forEach(r => {
+      const name = `"${r.name.replace(/"/g, '""')}"`;
+      const status = r.attending === 'accept' ? "Attending" : "Declined";
+      const party = r.guests;
+      const notes = `"${(r.notes || '').replace(/"/g, '""')}"`;
+      const time = `"${r.timestamp}"`;
+      
+      csvContent += `${name},${status},${party},${notes},${time}\n`;
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `wedding_rsvps_${new Date().toISOString().slice(0,10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  window.clearRSVPsData = async function() {
+    if (globalLoadedRSVPs.length === 0) {
+      alert("Database is already empty.");
+      return;
+    }
+
+    if (confirm("🚨 WARNING: Are you sure you want to delete the entire wedding RSVP database? This is permanent.")) {
+      if (confirm("Click OK to confirm absolute database wipe.")) {
+        try {
+          const res = await fetch(`${API_BASE}/api/clear-rsvps`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-passcode": activePasscode
+            }
+          });
+          const result = await res.json();
+
+          if (!res.ok || !result.success) {
+            throw new Error(result.error || "Wipe failed.");
+          }
+
+          localStorage.removeItem("my_wedding_rsvp"); // Reset client state indicator too
+          alert("Wedding guest database wiped successfully from server.");
+          renderDashboardData();
+          resetRSVPForm();
+          closeDashboard();
+
+        } catch (err) {
+          alert(`Wipe failed: ${err.message}`);
+        }
+      }
+    }
+  };
+
+  function escapeHTML(str) {
+    if (!str) return '';
+    return str.replace(/[&<>'"]/g, 
+      tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[tag] || tag)
+    );
+  }
 </script>
 
 </body>
